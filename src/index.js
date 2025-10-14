@@ -1,8 +1,8 @@
-import config from './config/config.js';
+import {PORT} from './config/env.config.js';
 import express from 'express';
 
 const app = express();
 
-app.listen(config.port, () => {
-    console.log(`Servidor en el puerto ${config.port}`);
+app.listen(PORT, () => {
+    console.log(`Servidor en el puerto ${PORT}`);
 });
