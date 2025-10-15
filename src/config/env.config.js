@@ -8,7 +8,9 @@ export const  {
     DB_HOST,
     DB_USER,
     DB_PASSWORD,
-    DB_NAME
+    DB_NAME,
+    DB_DIALECT,
+    DB_PORT
 } = process.env;
 
 if ( process.env.NODE_ENV !== 'production' ) {
