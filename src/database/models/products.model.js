@@ -1,5 +1,5 @@
-const {DataTypes, Model} = require('sequelize');
-const {CATEGORIES_TABLE} = require('./categories.model');
+import {DataTypes, Model} from 'sequelize';
+import CATEGORIES_TABLE from'./categories.model';
 
 const PRODUCTS_TABLE = 'tb_products';
 
@@ -24,7 +24,7 @@ const ProductsSchema ={
     },
     categoryId:{
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
             model: CATEGORIES_TABLE,
             key: 'id'
@@ -37,5 +37,19 @@ const ProductsSchema ={
     price:{
         type: DataTypes.INTEGER,
         allowNull:false
+    }
+}
+
+export class Products extends Model {
+    static associate(models){
+        this.belongsTo(models.Categories, {as: 'Category'})
+    }
+    static config(sequelize){
+        return{
+            sequelize,
+            tableName: PRODUCTS_TABLE,
+            modelName: 'Products',
+            timestamps: false
+        }
     }
 }
