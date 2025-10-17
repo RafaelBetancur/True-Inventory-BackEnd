@@ -1,10 +1,11 @@
-const {DataTypes, Model} = require('sequelize');
-const { PRODUCTS_TABLE } = require('./products.model')
-const { USERS_TABLE } = require('./users.model')
-
-const MOVEMENTS_TABLE = 'tb_movements';
-
-const MovementsSchema = {
+import { DataTypes, Model } from 'sequelize';
+import { PRODUCTS_TABLE } from './products.model.js';
+import { USER_TABLE } from './users.model.js';
+ 
+ 
+export const MOVEMENTS_TABLE = 'tb_movements';
+ 
+export const MovementsSchema = {
     id:{
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -35,7 +36,7 @@ const MovementsSchema = {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: USERS_TABLE,
+            model: USER_TABLE,
             key: 'id'
         }
     }

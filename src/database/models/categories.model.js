@@ -1,8 +1,8 @@
 import {DataTypes, Model} from 'sequelize'
 
-const CATEGORIES_TABLE = 'tb_categories'
+export const CATEGORIES_TABLE = 'tb_categories'
 
-const CategoriesSchema = {
+export const CategoriesSchema = {
     id:{
         primaryKey: true,
         type: DataTypes.INTEGER,

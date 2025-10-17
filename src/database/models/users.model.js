@@ -1,9 +1,9 @@
-const {DataTypes, Model} = require('sequelize');
-const { ROL_TABLE } = require('./rol.model')
+import { DataTypes, Model } from 'sequelize';
+import { ROL_TABLE } from './rol.model.js';
 
-const USERS_TABLE = 'tb_users';
+export const USER_TABLE = 'tb_users';
 
-const UsersSchema = {
+export const UsersSchema = {
     id:{
         primaryKey: true,
         type: DataTypes.INTEGER,

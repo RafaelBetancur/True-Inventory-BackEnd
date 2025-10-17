@@ -1,9 +1,9 @@
 import {DataTypes, Model} from 'sequelize';
-import CATEGORIES_TABLE from'./categories.model';
+import {CATEGORIES_TABLE} from'./categories.model.js';
 
-const PRODUCTS_TABLE = 'tb_products';
+export const PRODUCTS_TABLE = 'tb_products';
 
-const ProductsSchema ={
+export const ProductsSchema ={
     id:{
         primaryKey: true,
         type: DataTypes.INTEGER,

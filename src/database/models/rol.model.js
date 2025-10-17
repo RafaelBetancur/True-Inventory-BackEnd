@@ -1,8 +1,8 @@
-const {DataTypes, Model} = require('sequelize');
-
-const ROL_TABLE = 'tb_rol';
-
-const RolSchema = {
+import { DataTypes, Model } from 'sequelize';
+ 
+export const ROL_TABLE = 'tb_rol';
+ 
+export const RolSchema = {
     id:{
         primaryKey: true,
         type: DataTypes.INTEGER,
