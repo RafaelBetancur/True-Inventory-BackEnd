@@ -3,3 +3,4 @@ package-lock*
 *.local
 .env
 dist
+zazas_BackEnd/src/database/config.json
