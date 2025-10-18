@@ -1,8 +1,8 @@
-import {DataTypes, Model} from 'sequelize'
+const {DataTypes, Model} = require('sequelize') 
 
-export const CATEGORIES_TABLE = 'tb_categories'
+const CATEGORIES_TABLE = 'tb_categories'
 
-export const CategoriesSchema = {
+const CategoriesSchema = {
     id:{
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -19,7 +19,7 @@ export const CategoriesSchema = {
     }
 }
 
-export class Categories extends Model {
+class Categories extends Model {
     static associate(models){
         this.hasMany(models.Products, {
             as: 'products',
@@ -35,3 +35,4 @@ export class Categories extends Model {
         }
     }
 }
+module.exports = {CATEGORIES_TABLE,CategoriesSchema,Categories}

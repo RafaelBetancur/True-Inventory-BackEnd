@@ -1,9 +1,9 @@
-import { DataTypes, Model } from 'sequelize';
-import { ROL_TABLE } from './rol.model.js';
+const { DataTypes, Model } = require('sequelize');
+const { ROL_TABLE } =require('./rol.model');
 
-export const USER_TABLE = 'tb_users';
+const USER_TABLE = 'tb_users';
 
-export const UsersSchema = {
+const UsersSchema = {
     id:{
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -31,3 +31,21 @@ export const UsersSchema = {
         }
     }
 }
+
+class Users extends Model {
+    static associate(models){
+        this.belongsTo(models.Rol, {as: 'Rol'})
+        this.hasMany(models.Movements, {as: 'Movements',
+            foreignKey: 'userId'
+        })
+    }
+    static config(sequelize){
+            return{
+                sequelize,
+                tableName: USER_TABLE,
+                modelName: 'Users',
+                timestamps: false
+            }
+        }
+}
+module.exports= {USER_TABLE,UsersSchema,Users}

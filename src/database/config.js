@@ -1,6 +1,6 @@
-import {config} from '../config/config';
-
-module.exports = {
+const {config} = require('../config/config');
+console.log(config)
+module.exports= {
   development: {
     url: config.dbUrl,
     dialect: 'postgres'

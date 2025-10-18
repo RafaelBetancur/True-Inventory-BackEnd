@@ -1,9 +1,9 @@
-import {DataTypes, Model} from 'sequelize';
-import {CATEGORIES_TABLE} from'./categories.model.js';
+const {DataTypes, Model} = require('sequelize');
+const {CATEGORIES_TABLE} =require('./categories.model');
 
-export const PRODUCTS_TABLE = 'tb_products';
+const PRODUCTS_TABLE = 'tb_products';
 
-export const ProductsSchema ={
+const ProductsSchema ={
     id:{
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -40,16 +40,20 @@ export const ProductsSchema ={
     }
 }
 
-export class Products extends Model {
+class Products extends Model {
     static associate(models){
         this.belongsTo(models.Categories, {as: 'Category'})
+        this.hasMany(models.Movements, {as: 'Movements',
+            ForeignKey: 'ProductId'
+        })
     }
     static config(sequelize){
         return{
             sequelize,
-            tableName: PRODUCTS_TABLE,
+            tableName:  PRODUCTS_TABLE,
             modelName: 'Products',
             timestamps: false
         }
     }
 }
+module.exports={PRODUCTS_TABLE,ProductsSchema,Products}

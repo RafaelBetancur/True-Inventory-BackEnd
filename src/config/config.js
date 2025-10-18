@@ -1,8 +1,8 @@
 //cargamos las variables de entorno declaradas en el archivo .env, especificando la ubicación del archivo partiendo desde la raíz del proyecto, solo si está en un entorno de desarrollo
-import dotenv from 'dotenv';
+const dotenv= require('dotenv')
 
 if ( process.env.NODE_ENV !== 'production' ) {
-    dotenv.config({ path: '.src/config/.env'});
+    dotenv.config({ path: './src/config/.env'});
 }
 
 const config = {
@@ -17,4 +17,4 @@ const config = {
 
 config.dbUrl = process.env.DATABASE_URL || `postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
 
-export {config};
+module.exports = {config};

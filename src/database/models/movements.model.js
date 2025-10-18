@@ -1,11 +1,11 @@
-import { DataTypes, Model } from 'sequelize';
-import { PRODUCTS_TABLE } from './products.model.js';
-import { USER_TABLE } from './users.model.js';
+const {DataTypes, Model} = require('sequelize')
+const { PRODUCTS_TABLE } = require('./products.model');
+const { USER_TABLE } = require('./users.model');
  
  
-export const MOVEMENTS_TABLE = 'tb_movements';
+const MOVEMENTS_TABLE = 'tb_movements';
  
-export const MovementsSchema = {
+const MovementsSchema = {
     id:{
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -41,3 +41,18 @@ export const MovementsSchema = {
         }
     }
 }
+class Movements extends Model {
+    static associate(models){
+        this.belongsTo(models.Products, {as: 'Products'})
+        this.belongsTo(models.Users, {as: 'Users'})
+    }
+    static config(sequelize){
+        return{
+            sequelize,
+            tableName: MOVEMENTS_TABLE,
+            modelName: 'Movements',
+            timestamps: false
+        }
+    }
+}
+module.exports= {MOVEMENTS_TABLE,MovementsSchema,Movements}
