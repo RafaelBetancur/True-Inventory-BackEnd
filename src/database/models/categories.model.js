@@ -35,4 +35,4 @@ class Categories extends Model {
         }
     }
 }
-module.exports = {CATEGORIES_TABLE,CategoriesSchema,Categories}
+module.exports = {CATEGORIES_TABLE, CategoriesSchema, Categories}
