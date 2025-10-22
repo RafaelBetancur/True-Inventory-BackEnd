@@ -1,4 +1,5 @@
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
+import path from 'path'
 
 dotenv.config();
 
@@ -10,9 +11,10 @@ export const  {
     DB_PASSWORD,
     DB_NAME,
     DB_DIALECT,
-    DB_PORT
-} = process.env;
+    DB_PORT,
+    JWT_SECRET
+} = process.env
 
 if ( process.env.NODE_ENV !== 'production' ) {
-    dotenv.config({ path: '.src/config/.env'});
+    dotenv.config({ path: '.src/config/.env'})
 }
