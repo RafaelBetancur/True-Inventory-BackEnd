@@ -9,5 +9,14 @@ const createCategory = async (data) => {
         throw new Error('Error al crear la categoría: ' + error.message);
     }
 }
+const getCategories = async () => {
+    try
+    {
+        const categories = await Categories.findAll()
+        return categories
+    } catch (error){
+        throw new Error('Error al encontrar categorias: '+ error.message)
+    }
+}
 
-module.exports = { createCategory };
+module.exports = { createCategory, getCategories };

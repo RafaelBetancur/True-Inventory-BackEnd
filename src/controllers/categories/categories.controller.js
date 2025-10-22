@@ -1,4 +1,5 @@
-const { createCategory } = require('../../services/categories/categories.service');
+const { Categories } = require('../../database/models/categories.model');
+const { createCategory, getCategories } = require('../../services/categories/categories.service');
 
 const createCategoryController = async (req, res) => {
   try {
@@ -13,4 +14,13 @@ const createCategoryController = async (req, res) => {
   }
 };
 
-module.exports = { createCategoryController };
+const getCategoryController = async (req, res) =>{
+  try{
+    const categories = await getCategories();
+    res.json(categories)
+  }catch (error){
+    res.status(500).json({ message: error.message})
+  }
+}
+
+module.exports = { createCategoryController, getCategoryController };
