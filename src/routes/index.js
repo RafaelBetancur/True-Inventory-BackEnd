@@ -1,4 +1,4 @@
-const categoriesRouter = require('./categories/index'); 
+const categoriesRouter = require('./categories.routes'); 
 
 function routerApi(app) {
   app.use('/categories', categoriesRouter);

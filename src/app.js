@@ -1,6 +1,5 @@
 const { config } = require('./config/config');
 const express = require('express');
-const categoriesRouter = require('./routes/categories/index'); 
 const routerApi = require('./routes');
 
 const app = express();
