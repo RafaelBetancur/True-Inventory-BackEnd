@@ -19,4 +19,17 @@ const getCategories = async () => {
     }
 }
 
-module.exports = { createCategory, getCategories };
+const deleteCategory = async (id) => {
+    try
+    {
+        const category = await Categories.findByPk(id)
+
+        if(!category) throw new Error("ID inválido");
+        await category.destroy()
+        return category
+    }catch{
+        throw new Error('Error al eliminar la categoria: '+ error.message)
+    }
+}
+
+module.exports = { createCategory, getCategories, deleteCategory };
