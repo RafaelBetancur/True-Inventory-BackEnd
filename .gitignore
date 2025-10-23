@@ -3,3 +3,4 @@ package-lock*
 *.local
 .env
 dist
+/src/database/config.json
