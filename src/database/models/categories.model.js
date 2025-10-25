@@ -23,7 +23,7 @@ class Categories extends Model {
     static associate(models){
         this.hasMany(models.Products, {
             as: 'products',
-            foreignKey: 'categoryId'
+            foreignKey: 'category_id'
         })
     }
     static config(sequelize){

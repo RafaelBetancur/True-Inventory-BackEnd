@@ -24,7 +24,7 @@ const MovementsSchema = {
         type: DataTypes.STRING,
         allowNull: false
     },
-    productId:{
+    product_id:{
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -32,7 +32,7 @@ const MovementsSchema = {
             key: 'id'
         }
     },
-    userId:{
+    user_id:{
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

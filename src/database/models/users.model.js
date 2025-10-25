@@ -22,7 +22,7 @@ const UsersSchema = {
         type: DataTypes.STRING,
         allowNull: false
     },
-    rolId: {
+    rol_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -36,7 +36,7 @@ class Users extends Model {
     static associate(models){
         this.belongsTo(models.Rol, {as: 'Rol'})
         this.hasMany(models.Movements, {as: 'Movements',
-            foreignKey: 'userId'
+            foreignKey: 'user_id'
         })
     }
     static config(sequelize){
