@@ -19,7 +19,7 @@ class Rol extends Model {
     static associate(models){
         this.hasMany(models.Users, {
             as: 'Users',
-            foreignKey: 'rolId'
+            foreignKey: 'rol_id'
         })
     }
     static config(sequelize){

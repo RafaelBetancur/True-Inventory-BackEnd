@@ -22,7 +22,7 @@ const ProductsSchema ={
         type: DataTypes.INTEGER,
         allowNull:false
     },
-    categoryId:{
+    category_id:{
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -44,7 +44,7 @@ class Products extends Model {
     static associate(models){
         this.belongsTo(models.Categories, {as: 'Category'})
         this.hasMany(models.Movements, {as: 'Movements',
-            ForeignKey: 'ProductId'
+            ForeignKey: 'product_id'
         })
     }
     static config(sequelize){
