@@ -3,7 +3,10 @@ const { createProductsController, listProductsControllers } = require('../contro
 
 const router = express.Router();
 
-router.post('/', createProductsController);
+router.post('/create', async (req, res, next) => { 
+    const product = await createProductsController(req.body)
+    res.json(product)
+});
 router.get('/', listProductsControllers);
 
 

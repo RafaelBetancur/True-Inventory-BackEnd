@@ -1,25 +1,24 @@
 
-const ProductService = require('../../services/products/products.service');
-const service = new ProductService()
+const {createProduct,listProducts,getProducts,updateProducts,deleteProducts } = require('../../services/products/products.service')
 
 
 
 // Crear un nuevo producto
-const createProductsController = async (req, res) => {
+const createProductsController = async (data) => {
   try {
-    const producto = await service.createProduct(req.body);
-    res.status(201).json(producto);
+    const producto = await createProduct(data);
+    return(producto);
   } catch (error) {
     console.log (error);
-    res.status(500).json({ error: 'Error al crear el producto' });
+    return{ error: 'Error al crear el producto' };
   }
 };
 
 // Listar todos los productos
 const listProductsControllers = async (req, res) => {
   try {
-    const productos = await service.listProducts()
-    return productos
+    const productos = await listProducts()
+    res.json(productos)
   } catch (error) {
     res.status(500).json({ error: 'Error al listar productos' });
   }
