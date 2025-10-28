@@ -1,5 +1,4 @@
 const {DataTypes, Model} = require('sequelize') 
-
 const CATEGORIES_TABLE = 'tb_categories'
 
 const CategoriesSchema = {

@@ -1,4 +1,4 @@
-const {DataTypes, Model} = require('sequelize');
+const {DataTypes, Model,Sequelize} = require('sequelize');
 const {CATEGORIES_TABLE} =require('./categories.model');
 
 const PRODUCTS_TABLE = 'tb_products';
@@ -28,7 +28,9 @@ const ProductsSchema ={
         references: {
             model: CATEGORIES_TABLE,
             key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
     },
     image:{
         type: DataTypes.STRING,
@@ -42,15 +44,15 @@ const ProductsSchema ={
 
 class Products extends Model {
     static associate(models){
-        this.belongsTo(models.Categories, {as: 'Category'})
+        this.belongsTo(models.Categories, {as: 'category',foreignKey: 'category_id'})
         this.hasMany(models.Movements, {as: 'Movements',
-            ForeignKey: 'product_id'
+            foreignKey: 'product_id'
         })
     }
     static config(sequelize){
         return{
             sequelize,
-            tableName:  PRODUCTS_TABLE,
+            tableName:PRODUCTS_TABLE,
             modelName: 'Products',
             timestamps: false
         }
