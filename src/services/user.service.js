@@ -4,6 +4,19 @@ const { Users } = require('../database/models/users.model')
 
 const SECRET_KEY = process.env.JWT_SECRET || 'secret-key-temporal'
 
+// Generar token
+const generateToken = (user) => {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+      rolId: user.rolId
+    },
+    SECRET_KEY,
+    { expiresIn: '2h' }
+  )
+}
+
 // Crear usuario
 const registerUser = async ({ name, email, password, rolId }) => {
   if (!name || !email || !password || !rolId) {
@@ -69,5 +82,6 @@ const verifyToken = (authHeader) => {
 module.exports = {
   registerUser,
   loginUser,
-  verifyToken
+  verifyToken,
+  generateToken
 }
