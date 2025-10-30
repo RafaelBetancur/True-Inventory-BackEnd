@@ -9,6 +9,13 @@ const getCategories = async () => {
     return categories    
 }
 
+const getCategoryById = async (id) => {
+  const category = await Categories.findByPk(id);
+  if (!category) throw new Error('Categoría no encontrada');
+  return category;
+};
+
+
 const deleteCategory = async (id) => {
     
     const category = await Categories.findByPk(id)
@@ -19,4 +26,4 @@ const deleteCategory = async (id) => {
     
 }
 
-module.exports = { createCategory, getCategories, deleteCategory };
+module.exports = { createCategory, getCategories, getCategoryById ,deleteCategory };
