@@ -43,8 +43,8 @@ const MovementsSchema = {
 }
 class Movements extends Model {
     static associate(models){
-        this.belongsTo(models.Products, {as: 'Products'})
-        this.belongsTo(models.Users, {as: 'Users'})
+        this.belongsTo(models.Products, {as: 'Products', foreignKey: 'product_id'})
+        this.belongsTo(models.Users, {as: 'Users', foreignKey: 'user_id'})
     }
     static config(sequelize){
         return{

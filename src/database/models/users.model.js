@@ -34,7 +34,7 @@ const UsersSchema = {
 
 class Users extends Model {
     static associate(models){
-        this.belongsTo(models.Rol, {as: 'Rol'})
+        this.belongsTo(models.Rol, {as: 'Rol', foreignKey: 'rol_id'})
         this.hasMany(models.Movements, {as: 'Movements',
             foreignKey: 'user_id'
         })
