@@ -45,9 +45,7 @@ const ProductsSchema ={
 class Products extends Model {
     static associate(models){
         this.belongsTo(models.Categories, {as: 'category',foreignKey: 'category_id'})
-        this.hasMany(models.Movements, {as: 'Movements',
-            foreignKey: 'product_id'
-        })
+        this.hasMany(models.Movements, {as: 'Movements', foreignKey: 'movement_id' })
     }
     static config(sequelize){
         return{
