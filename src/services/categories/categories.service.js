@@ -1,4 +1,3 @@
-const sequelize = require('../../libs/sequelize')
 const { Categories } = require('../../database/models/categories.model');
 
 const createCategory = async (data) => {
@@ -6,10 +5,8 @@ const createCategory = async (data) => {
     return newCategory;
 }
 const getCategories = async () => {
-   
     const categories = await Categories.findAll()
-    return categories
-    
+    return categories    
 }
 
 const deleteCategory = async (id) => {

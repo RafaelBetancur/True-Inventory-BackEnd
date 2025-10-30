@@ -9,7 +9,10 @@ const createCategoryController = async (req, res) => {
       data: category
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ 
+      name: error.name,
+      message: error.message
+    });
   }
 };
 
@@ -18,7 +21,10 @@ const getCategoryController = async (req, res) =>{
     const categories = await getCategories();
     res.json(categories)
   }catch (error){
-    res.status(500).json({ message: error.message})
+    res.status(500).json({ 
+      name: error.name,
+      message: error.message
+    })
   }
 }
 
@@ -31,7 +37,10 @@ const deleteCategoryController = async (req, res) => {
        message: 'Categoría eliminada', data: category 
       });
   }catch (error){
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ 
+      name: error.name,
+      message: error.message 
+    });
   }
 }
 
