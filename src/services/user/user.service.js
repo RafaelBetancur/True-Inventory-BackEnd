@@ -1,24 +1,8 @@
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const { Users } = require('../../database/models/users.model')
+const { Users } = require('../database/models/users.model')
 
-const SECRET_KEY = process.env.JWT_SECRET || 'secret-key-temporal'
-
-// Generar token
-const generateToken = (user) => {
-  return jwt.sign(
-    {
-      id: user.id,
-      email: user.email,
-      rolId: user.rolId
-    },
-    SECRET_KEY,
-    { expiresIn: '2h' }
-  )
-}
-
-// Crear usuario
-const registerUser = async ({ name, email, password, rolId }) => {
+// Registrar usuario
+const register = async ({ name, email, password, rolId }) => {
   if (!name || !email || !password || !rolId) {
     throw new Error('Todos los campos son obligatorios')
   }
@@ -37,6 +21,7 @@ const registerUser = async ({ name, email, password, rolId }) => {
   })
 
   return {
+    success: true,
     message: 'Usuario creado correctamente',
     user: {
       id: newUser.id,
@@ -47,8 +32,12 @@ const registerUser = async ({ name, email, password, rolId }) => {
   }
 }
 
-// Login
-const loginUser = async ({ email, password }) => {
+// Logeo de usuario
+const login = async ({ email, password }) => {
+  if (!email || !password) {
+    throw new Error('Email y contraseña son obligatorios')
+  }
+
   const user = await Users.findOne({ where: { email } })
   if (!user) {
     throw new Error('Usuario no encontrado')
@@ -59,29 +48,18 @@ const loginUser = async ({ email, password }) => {
     throw new Error('Contraseña incorrecta')
   }
 
-  const token = jwt.sign(
-    { id: user.id, email: user.email, rolId: user.rolId },
-    SECRET_KEY,
-    { expiresIn: '2h' }
-  )
-
-  return { message: 'Login exitoso', token }
-}
-
-// Validar token
-const verifyToken = (authHeader) => {
-  if (!authHeader) {
-    throw new Error('Token requerido')
+  return {
+    success: true,
+    profile: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      rol: user.rolId
+    }
   }
-
-  const token = authHeader.split(' ')[1]
-  const decoded = jwt.verify(token, SECRET_KEY)
-  return { message: 'Token válido', user: decoded }
 }
 
 module.exports = {
-  registerUser,
-  loginUser,
-  verifyToken,
-  generateToken
+  register,
+  login
 }

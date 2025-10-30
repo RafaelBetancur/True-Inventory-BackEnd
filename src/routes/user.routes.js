@@ -6,10 +6,7 @@ const router = express.Router()
 // Crear usuario
 router.post('/register', UserController.register)
 
-// Login
-router.post('/login', UserController.login)
-
-// Autenticar token
-router.get('/auth', UserController.auth)
+// Logeo de usuario
+router.post('/login', UserController.login);
 
 module.exports = router
