@@ -1,5 +1,4 @@
-const bcrypt = require('bcryptjs')
-const { Users } = require('../database/models/users.model')
+const { Users } = require('../../database/models/users.model')
 
 // Registrar usuario
 const register = async ({ name, email, password, rolId }) => {
@@ -12,12 +11,11 @@ const register = async ({ name, email, password, rolId }) => {
     throw new Error('El correo ya está registrado')
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10)
   const newUser = await Users.create({
     name,
     email,
-    password: hashedPassword,
-    rolId
+    password,
+    rol_id: rolId // 👈 usa el nombre real del campo
   })
 
   return {
@@ -27,7 +25,7 @@ const register = async ({ name, email, password, rolId }) => {
       id: newUser.id,
       name: newUser.name,
       email: newUser.email,
-      rolId: newUser.rolId
+      rolId: newUser.rol_id
     }
   }
 }
@@ -38,15 +36,17 @@ const login = async ({ email, password }) => {
     throw new Error('Email y contraseña son obligatorios')
   }
 
-  const user = await Users.findOne({ where: { email } })
+  const user = await Users.findOne({ where: { email }, raw: true })
   if (!user) {
     throw new Error('Usuario no encontrado')
   }
 
-  const validPassword = await bcrypt.compare(password, user.password)
+  const validPassword = password === user.password
   if (!validPassword) {
     throw new Error('Contraseña incorrecta')
   }
+
+  console.log("Usuario encontrado en login:", user);
 
   return {
     success: true,
@@ -54,7 +54,7 @@ const login = async ({ email, password }) => {
       id: user.id,
       name: user.name,
       email: user.email,
-      rol: user.rolId
+      rol: user.rol_id
     }
   }
 }
