@@ -1,5 +1,7 @@
 const {DataTypes, Model,Sequelize} = require('sequelize');
 const {CATEGORIES_TABLE} =require('./categories.model');
+const { Movements } = require('./movements.model')
+
 
 const PRODUCTS_TABLE = 'tb_products';
 
@@ -45,14 +47,29 @@ const ProductsSchema ={
 class Products extends Model {
     static associate(models){
         this.belongsTo(models.Categories, {as: 'category',foreignKey: 'category_id'})
-        this.hasMany(models.Movements, {as: 'Movements', foreignKey: 'movement_id' })
     }
     static config(sequelize){
         return{
             sequelize,
             tableName:PRODUCTS_TABLE,
             modelName: 'Products',
-            timestamps: false
+            timestamps: false,
+            hooks: {
+                afterCreate: async (product, options) => {
+                    if (options && options.hooks === false) return;
+                    try{
+                        await Movements.create({
+                            quantity: product.stock,
+                            description:  `Producto creado: ${product.name}`,
+                            date: new Date().toISOString(),
+                            product_id: product.id,
+                            user_id: 1
+                        });
+                    }catch(error){
+                        console.log("Error al registar movimiento", error.message)
+                    }
+                }
+            }
         }
     }
 }
