@@ -62,7 +62,21 @@ class Products extends Model {
                             quantity: product.stock,
                             description:  `Producto creado: ${product.name}`,
                             date: new Date().toISOString(),
-                            product_id: product.id,
+                            product_name: product.name,
+                            user_id: 1
+                        });
+                    }catch(error){
+                        console.log("Error al registar movimiento", error.message)
+                    }
+                },
+                afterDestroy: async (product) => {
+                    try{
+                        const { Movements } = require('./movements.model')
+                        await Movements.create({
+                            quantity: 0,
+                            description: `Producto eliminado: ${product.name}`,
+                            date: new Date().toISOString(),
+                            product_name: product.name,
                             user_id: 1
                         });
                     }catch(error){
