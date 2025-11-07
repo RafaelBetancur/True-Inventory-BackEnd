@@ -1,6 +1,5 @@
 const {DataTypes, Model,Sequelize} = require('sequelize');
 const {CATEGORIES_TABLE} =require('./categories.model');
-const { Movements } = require('./movements.model')
 
 
 const PRODUCTS_TABLE = 'tb_products';
@@ -51,14 +50,14 @@ class Products extends Model {
     static config(sequelize){
         return{
             sequelize,
-            tableName:PRODUCTS_TABLE,
+            tableName: PRODUCTS_TABLE,
             modelName: 'Products',
             timestamps: false,
             hooks: {
-                afterCreate: async (product, options) => {
-                    if (options && options.hooks === false) return;
-                    console.log("Movimiento creado")
+                afterCreate: async (product) => {
+                    // if (options && options.hooks === false) return;
                     try{
+                        const { Movements } = require('./movements.model')
                         await Movements.create({
                             quantity: product.stock,
                             description:  `Producto creado: ${product.name}`,
