@@ -9,10 +9,11 @@ const {
 
 const router = express.Router();
 
-router.post('/create', async (req, res, next) => { 
-    const product = await createProductsController(req.body)
-    res.json(product)
-});
+// router.post('/create', async (req, res, next) => { 
+//     const product = await createProductsController(req.body)
+//     res.json(product)
+// });
+router.post('/', createProductsController);
 router.get('/', listProductsControllers);
 
 router.get('/:id', getProductByIdController);

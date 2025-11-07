@@ -7,14 +7,14 @@ const createMovement= async (data) => {
 
 const getMovements = async () => {
   const movements = await Movements.findAll({
-    include: ['Products', 'Users']
+    include: ['Users']
   });
   return movements;
 };
 
 const getMovementById = async (id) => {
   const movement = await Movements.findByPk(id, {
-    include: ['Products', 'Users']
+    include: ['Users']
   });
   if (!movement) throw new Error('Movimiento no encontrado');
   return movement;

@@ -10,6 +10,10 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert(CATEGORIES_TABLE,[
       {
+        "name":"Smartphones",
+        "description":"Dispositivos moviles con variaciones en distiantas gamas"
+      },
+      {
         "name":"Estuches",
         "description":"Protectores para los celulares"
       },
@@ -107,7 +111,7 @@ module.exports = {
         "quantity":23,
         "description":"Ingreso de nuevos ipods",
         "date":"25/10/2025",
-        "product_id":1,
+        "product_name":"ipods",
         "user_id":1
       }
     ])

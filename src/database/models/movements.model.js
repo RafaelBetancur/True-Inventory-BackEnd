@@ -1,5 +1,4 @@
 const {DataTypes, Model} = require('sequelize')
-const { PRODUCTS_TABLE } = require('./products.model');
 const { USER_TABLE } = require('./users.model');
  
  
@@ -24,13 +23,9 @@ const MovementsSchema = {
         type: DataTypes.STRING,
         allowNull: false
     },
-    product_id:{
-        type: DataTypes.INTEGER,
+    product_name:{
+        type: DataTypes.STRING,
         allowNull: false,
-        references: {
-            model: PRODUCTS_TABLE,
-            key: 'id'
-        }
     },
     user_id:{
         type: DataTypes.INTEGER,
@@ -43,8 +38,7 @@ const MovementsSchema = {
 }
 class Movements extends Model {
     static associate(models){
-        this.belongsTo(models.Products, {as: 'Products', foreignKey: 'product_id'})
-        this.belongsTo(models.Users, {as: 'Users', foreignKey: 'user_id'})
+    this.belongsTo(models.Users, {as: 'Users', foreignKey: 'user_id'})
     }
     static config(sequelize){
         return{

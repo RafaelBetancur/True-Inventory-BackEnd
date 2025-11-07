@@ -1,9 +1,13 @@
 const {createProduct,listProducts,getProducts,updateProducts,deleteProducts } = require('../../services/products/products.service')
 
-const createProductsController = async (data) => {
+const createProductsController = async (req, res) => {
   try {
+    const data = req.body
     const producto = await createProduct(data);
-    return(producto);
+    res.status(201).json({
+            message: 'Producto creado exitosamente',
+            data: producto
+        })
   } catch (error) {
     console.log (error);
     res.status(500).json({ error: error.message });
