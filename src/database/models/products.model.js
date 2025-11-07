@@ -57,6 +57,7 @@ class Products extends Model {
             hooks: {
                 afterCreate: async (product, options) => {
                     if (options && options.hooks === false) return;
+                    console.log("Movimiento creado")
                     try{
                         await Movements.create({
                             quantity: product.stock,
